@@ -7,7 +7,7 @@ def read_edge_list(fileName):
 
     all_edges = []
     nodes = []
-    adj_nodes_list = []
+    adj_nodes_list = {}
 
     for edge in data:
         # Danh sách các cạnh
@@ -19,7 +19,7 @@ def read_edge_list(fileName):
 
     # Duyệt qua toàn bộ danh sách nodes, tiến hành tìm ra tất cả các nút kề của node
     for node in nodes:
-        adj_nodes = []
+        adj_nodes = {}
         # Với một nút node, duyệt qua toàn bộ các cạnh có trong danh sách all_edges để tìm ra các nút kề của nút node
         # Chú ý cần phải xét hai chiều
         for edge in all_edges:
@@ -27,13 +27,12 @@ def read_edge_list(fileName):
             # Lần lượt kiểm tra hai nút trong một cạnh để kiểm tra xem cạnh đó có đang chứa nút node đang xét không.
             # Nếu đúng là nó thì thêm nút còn lại vào danh sách nút kề.
             if edge[0] == node:
-                adj_nodes.append(edge[1])
+                adj_nodes[edge[1]] = edge[2]
             if edge[1] == node:
-                adj_nodes.append(edge[0])
-        adj_nodes_list.append(adj_nodes)
+                adj_nodes[edge[0]] = edge[2]
+        adj_nodes_list[node] = adj_nodes
 
     # Tạo ra danh sách kề với key là nút cha và value là danh sách các nút kề
-    graph = dict(zip(nodes, adj_nodes_list))
 
     # Đóng file
     file.close()
@@ -42,11 +41,5 @@ def read_edge_list(fileName):
     print("Nodes: ", nodes)
     print("Adjacency Nodes: ", adj_nodes_list)
 
-    return graph
-
-
-# if __name__ == "__main__":
-#     file_name = "edge_list.txt"
-#     GRAPH = read_edge_list(file_name)
-#     print("Adjacency List: ", GRAPH)
+    return adj_nodes_list
 

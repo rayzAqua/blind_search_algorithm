@@ -1,6 +1,6 @@
-A B
-A C
-B D
-C D
-C E
-D E
+A B 1
+A C 2
+B D 3
+C D 4
+C E 5
+D E 6

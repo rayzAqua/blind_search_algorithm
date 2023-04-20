@@ -1,44 +1,41 @@
 """
-    Depth-limited Search - Tìm kiếm giới hạn độ sâu
+    Depth-limited Search: Tìm kiếm giới hạn độ sâu
 """
 
 from readfile import read_edge_list as read
 
-def DLS(graph, start, end):
-    # Tìm kiếm theo chiều sâu:
-    # Khởi tạo một danh sách rỗng, danh sách này sẽ chứa các nút đã được duyệt
-    # Đầu tiên, thêm nút bắt đầu vào danh sách rỗng trên và tiến hành thêm các nút kề với nút bắt đầu vào danh sách O.
-    # Lấy một nút kề đã được thêm vào danh sách theo thứ tự của bảng chữ cái alphabet
-    # Tiếp tục thêm các nút kề của nút đó vào danh sách O, chú ý các nút được thêm vào phải đảm
-    # bảo quy tắc Last In Fist Out và theo thứ tự alphabet
-    # Lặp lại cho đến khi đến nút sâu nhất.
-    # Tiến hành kiểm tra xem nút sâu nhất đó có phải là nút đích không ? Nếu đúng thì đó là kết quả đường đi
-    # Nếu không thì tiếp tục duyệt qua các nút còn lại trong danh sách và lặp lại việc tìm kiếm nút sâu nhất
-    # cho đến khi tìm ra được nút đích
+def dls(graph, start, end, depth, visited=[]):
 
-    # Danh sách chứa các nút đã được duyệt qua
-    visited = []
-    # Danh sách chứa các nút đang đợi để được duyệt
-    fringe = [start]
+    # Đánh dấu nút đã được duyệt - khởi đầu bằng nút start
+    if start not in visited:
+        visited.append(start)
 
-    while fringe:
-        node = fringe.pop(0)
-        if node not in visited:
-            visited.append(node)
-            if node == end:
-                return visited
-            for neighbor, weight in graph[node].items():
-                if neighbor not in fringe:
-                    fringe.append(neighbor)
-            print(fringe)
+    # Nếu đúng là nút đích thì trả về start
+    if start == end:
+        return [start]
+
+    # Nếu không tìm thấy nút đích mà depth == 0 thì trả về không tìm thấy gì cả
+    if depth <= 0:
+        return None
+
+    # Lấy nút kề của nút start và kiểm tra xem nó đã được duyệt chưa, nếu chưa thì gọi đệ quy tiếp tục tìm
+    # nút kề của nó. Lặp đi lặp lại đến khi tìm được nút đích hoặc depth == 0
+    for neighbor, weight in graph[start].items():
+        if neighbor not in visited:
+            path = dls(graph, neighbor, end, depth-1, visited)
+            # Nếu path không None có nghĩa là đệ quy đã trả về một nút (cụ thể là nút được lưu ở biến start)
+            # và gán nó cho biến path. Sau đó, lấy path + với nút được lưu ở biến start tại lần gọi đệ quy trước đó,
+            # ta thu được đường đi đến nút đích.
+            if path is not None:
+                return [start] + path
 
     return None
 
 
-if __name__ == "__main__":
-    # Đọc vào danh sách cạnh
-    graph = read("edge_list.txt")
-    start = "A"
-    end = "D"
-
-    print("Solutions:", DLS(graph, start, end))
+# if __name__ == "__main__":
+#     # Đọc vào danh sách cạnh
+#     graph = read("edge_list.txt")
+#     start = "A"
+#     end = "E"
+#     depth = 2
+#     print("Solutions:", dls(graph, start, end, depth))

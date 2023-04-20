@@ -22,7 +22,7 @@ def read_edge_list(fileName):
         for node in edge[0:2]:
             if node not in nodes and node is not None:
                 nodes.append(node)
-    print(nodes)
+
     nodes.sort()
     # Duyệt qua toàn bộ danh sách nodes, tiến hành tìm ra tất cả các nút kề của node
     for node in nodes:
@@ -50,5 +50,5 @@ def read_edge_list(fileName):
     print("Nodes: ", nodes)
     print("Adjacency Nodes Graph: ", adj_nodes_list)
 
-    return adj_nodes_list
+    return nodes, adj_nodes_list
 

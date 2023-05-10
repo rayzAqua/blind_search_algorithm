@@ -29,6 +29,7 @@ def read_edge_list(fileName):
         adj_nodes = {}
         # Với một nút node, duyệt qua toàn bộ các cạnh có trong danh sách all_edges để tìm ra các nút kề của nút node
         # Chú ý cần phải xét hai chiều
+        # all_edges là list chứa các tuple, các tuple là các cạnh ghi trong file txt
         for edge in all_edges:
             # Vì là đồ thị vô hướng nên cần phải xét cả hai nút trong một cạnh (tương đương hai chiều của hai nút)
             # Lần lượt kiểm tra hai nút trong một cạnh để kiểm tra xem cạnh đó có đang chứa nút node đang xét không.
@@ -46,9 +47,8 @@ def read_edge_list(fileName):
     # Đóng file
     file.close()
 
-    print("Edge Lists: ", all_edges)
-    print("Nodes: ", nodes)
-    print("Adjacency Nodes Graph: ", adj_nodes_list)
+    print("Danh sách cạnh: ", all_edges)
+    print("Danh sách các đỉnh: ", nodes)
+    print("Danh sách các đỉnh lân cận và trọng số: ", adj_nodes_list)
 
     return nodes, adj_nodes_list
-

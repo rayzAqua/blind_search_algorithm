@@ -8,20 +8,34 @@ from readfile import read_edge_list as read
     Trong khi hàng đợi còn, lấy đỉnh đầu tiên trong hàng đợi ra để duyệt
 
 '''
-def bfs(graph, start):
-    visited, queue = set(), collections.deque([start])
-    visited.add(start)
+def bfs(graph, start, end):
+    # visited, queue = set(), collections.deque([start])
+    visited = []
+    queue = [start]
+
+    # visited.add(start)
 
     while queue:
-        vertex = queue.popleft()    # Lấy nút đầu tiên trong hàng đợi ra
-        print(str(vertex) + "  ", end="")
+        vertex = queue.pop(0)    # Lấy nút đầu tiên trong hàng đợi ra
+
+        if vertex == end:
+            visited.append(vertex)
+            return visited
+        
+        if vertex not in visited:
+            visited.append(vertex)
+        # print(str(vertex) + "  ", end="")
 
         # Kiểm tra các nút lân cận của nút vừa lấy ra đã được duyệt hay chưa,
         # nếu chưa thì thêm vô danh sách duyệt và thêm vào hàng đợi
         for neighbour, weight in graph[vertex].items():
             if neighbour not in visited:
-                visited.add(neighbour)
+                if neighbour == end:
+                    visited.append(neighbour)
+                    return visited
+                visited.append(neighbour)
                 queue.append(neighbour)
+    return None
 
 
 # if __name__ == '__main__':

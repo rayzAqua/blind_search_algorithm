@@ -26,14 +26,14 @@ def ids(graph, src, target, maxDepth):
         solution = dls(graph, src, target, depth, visited=[])
         if solution is not None:
             return solution, depth
-    return None
+    return None, maxDepth
 
 def help_ids_run(graph, start, end, maxDepth):
     solution, depth = ids(graph, start, end, maxDepth)
     if solution is not None:
         print("Tìm thấy kết quả đi từ đỉnh " + start + " đến đỉnh " + end + " là", solution, "tại độ sâu là:", depth)
     else:
-        print("Không tìm thấy gì cả")
+        print("Không tìm thấy đường đi tại đỉnh bắt đầu là " + str(start) + " với độ sâu là " + str(maxDepth));
 
 # if __name__ == "__main__":
 #     graph = read("edge_list.txt")

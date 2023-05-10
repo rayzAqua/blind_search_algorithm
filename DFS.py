@@ -30,7 +30,7 @@ def dfs(graph, start, end):
         # Tiến hành lấy các nút kề của nút node và thêm vào đầu danh sách fringe (LIFO)
         i = 0
         for neighbor, weight in graph[node].items():
-            # Chỉ được thêm vào fringe nếu nút đó chưa được đánh dấu laf visited
+            # Chỉ được thêm vào fringe nếu nút đó chưa được đánh dấu là visited
             if neighbor not in visited:
                 fringe.insert(i, neighbor)
                 i += 1

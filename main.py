@@ -170,9 +170,9 @@ def main():
 
             while True:
                 try:
-                    maxDepth = int(input("Nhập giới hạn độ sâu trong đoạn từ 0 đến 5: "))
-                    while maxDepth not in range(0, 5):
-                        maxDepth = int(input("Lựa chọn bạn nhập không nằm trong đoạn [0, 5], hãy nhập lại: "))
+                    maxDepth = int(input("Nhập giới hạn độ sâu trong đoạn từ 1 đến 5: "))
+                    while maxDepth not in range(1, 6):
+                        maxDepth = int(input("Lựa chọn bạn nhập không nằm trong đoạn [1, 5], hãy nhập lại: "))
                     break
                 except:
                     print("Lựa chọn không hợp lệ !")
@@ -213,6 +213,7 @@ def main():
                 os.system('cls')
             else:
                 cont = 0
+
 
 if __name__ == "__main__":
     main()

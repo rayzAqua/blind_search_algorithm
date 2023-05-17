@@ -22,7 +22,7 @@ def dls(graph, start, end, maxDepth, visited):
 
 # Sử dụng thuật toán IDS để tìm kiếm đường đi từ đỉnh src đến đỉnh target với độ sâu tối đa là max-depth
 def ids(graph, src, target, maxDepth):
-    for depth in range(maxDepth):
+    for depth in range(1, maxDepth+1):
         solution = dls(graph, src, target, depth, visited=[])
         if solution is not None:
             return solution, depth

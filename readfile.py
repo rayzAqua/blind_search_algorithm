@@ -6,6 +6,8 @@ def read_edge_list(fileName):
     data = file.readlines()
     data.sort()
 
+    print(data)
+
     all_edges = []
     nodes = []
     adj_nodes_list = {}
@@ -18,6 +20,7 @@ def read_edge_list(fileName):
         else:
             edge.append(None)
             all_edges.append(tuple(edge))
+
         # Danh sách các nút cha
         for node in edge[0:2]:
             if node not in nodes and node is not None:
@@ -52,3 +55,4 @@ def read_edge_list(fileName):
     print("Danh sách các đỉnh lân cận và trọng số: ", adj_nodes_list)
 
     return nodes, adj_nodes_list
+

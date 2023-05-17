@@ -66,6 +66,8 @@ def help_ucs_run(data, start, end):
 			if len(adj_nodes) == 2:
 				graph[key] = adj_nodes
 
+	print(graph)
+	print(cost)
 	answer = ucs(graph, cost, start, end, path)
 	print("Giá thành nhỏ nhất từ " + str(start) + " tới " + str(end) + " = ", str(answer))
 	print("Các đỉnh được thuật toán duyệt: ", path)
